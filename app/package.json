@@ -16,7 +16,6 @@
     "comlink": "^4.4.1",
     "events": "^3.3.0",
     "idb-keyval": "^6.2.0",
-    "jshashes": "^1.0.8",
     "lib0": "^0.2.73",
     "minisearch": "^6.0.1",
     "openai": "^3.2.1",

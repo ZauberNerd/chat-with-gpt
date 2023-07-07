@@ -1,5 +1,5 @@
 import { AbstractTTSPlayer, TTSPlayerState } from './types';
-import { cloneArrayBuffer, md5, sleep } from '../utils';
+import { cloneArrayBuffer, sha1, sleep } from '../utils';
 import { AsyncLoop } from "../utils/async-loop";
 import * as idb from '../utils/idb';
 import TTSPlugin from './tts-plugin';
@@ -23,7 +23,7 @@ const cache = new Map<string, ArrayBuffer>();
 async function getAudioFile(plugin: TTSPlugin<any>, text: string) {
     const voice = await plugin.getCurrentVoice();
 
-    const hash = await md5(text);
+    const hash = await sha1(text);
     const cacheKey = `audio:${voice?.service}:${voice?.id}:${hash}`;
 
     let buffer = cache.get(cacheKey);

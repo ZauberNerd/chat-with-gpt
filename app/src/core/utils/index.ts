@@ -1,5 +1,3 @@
-import * as hashes from 'jshashes';
-
 /**
  * Pauses the execution of the function for a specified duration.
  *
@@ -82,15 +80,21 @@ export async function share(text: string) {
 /*
 Hashing
 */
+async function sha1sum(input: Uint8Array) {
+    const digest = await crypto.subtle.digest("SHA-1", input);
 
-const hasher = new hashes.MD5();
+    return Array.from(new Uint8Array(digest))
+        .map((b) => b.toString(16).padStart(2, "0"))
+        .join("");
+}
 
+const textEncoder = new TextEncoder();
 const hashCache = new Map<string, string>();
 
-export async function md5(data: string): Promise<string> {
+export async function sha1(data: string): Promise<string> {
     if (!hashCache.has(data)) {
-        const hashHex = hasher.hex(data);
-        hashCache.set(data, hashHex);
+      const hashHex = await sha1sum(textEncoder.encode(data));
+      hashCache.set(data, hashHex);
     }
     return hashCache.get(data)!;
 }
