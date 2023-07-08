@@ -1,6 +1,5 @@
 import { BroadcastChannel } from 'broadcast-channel';
 import EventEmitter from 'events';
-import { v4 as uuidv4 } from 'uuid';
 import { Chat, Message, Parameters, UserSubmittedMessage } from './chat/types';
 import * as Y from 'yjs';
 import { IndexeddbPersistence } from 'y-indexeddb';
@@ -141,7 +140,7 @@ export class ChatManager extends EventEmitter {
         }
 
         const message: Message = {
-            id: uuidv4(),
+            id: crypto.randomUUID(),
             parentID: userSubmittedMessage.parentID,
             chatID: userSubmittedMessage.chatID,
             timestamp: Date.now(),
@@ -174,7 +173,7 @@ export class ChatManager extends EventEmitter {
         }
 
         const message: Message = {
-            id: uuidv4(),
+            id: crypto.randomUUID(),
             parentID,
             chatID,
             timestamp: Date.now(),

@@ -1,5 +1,4 @@
 import React, { useState, useRef, useMemo, useEffect, useCallback } from "react";
-import { v4 as uuidv4 } from 'uuid';
 import { IntlShape, useIntl } from "react-intl";
 import { Backend, User } from "./backend";
 import { ChatManager } from "./";
@@ -37,7 +36,7 @@ let intl: IntlShape;
 
 export function useCreateAppContext(): Context {
     const { id: _id } = useParams();
-    const [nextID, setNextID] = useState(uuidv4());
+    const [nextID, setNextID] = useState(crypto.randomUUID());
     const id = _id ?? nextID;
 
     const dispatch = useAppDispatch();
@@ -100,7 +99,7 @@ export function useCreateAppContext(): Context {
         };
 
         if (id === nextID) {
-            setNextID(uuidv4());
+            setNextID(crypto.randomUUID());
 
             const autoPlay = chatManager.options.getOption<boolean>('tts', 'autoplay');
 

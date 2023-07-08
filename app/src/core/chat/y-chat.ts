@@ -1,7 +1,6 @@
 import * as Y from 'yjs';
 import { Chat, Message } from './types';
 import EventEmitter from 'events';
-import { v4 as uuidv4 } from 'uuid';
 import { MessageTree } from './message-tree';
 
 const METADATA_KEY = 'metadata';
@@ -239,7 +238,7 @@ export class YChatDoc extends EventEmitter {
         });
     }
 
-    public createYChat(id = uuidv4()) {
+    public createYChat(id = crypto.randomUUID()) {
         // return new YChat(id, this.root);
         // this.set(id, chat);
         return id;
